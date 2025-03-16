@@ -1,10 +1,16 @@
+import { useEffect } from "react";
+
 const RecipePage = () => {
-    return (
-      <div>
-        <h1>Recipe Page</h1>
-      </div>
-    );
-  };
-  
-  export default RecipePage; // ✅ Add this line if it's missing
-  
+  useEffect(() => {
+    document.title = "Recipe Page"; // Updates tab title
+  }, []);
+
+  return (
+    <div className="recipe-container">
+      <h1>Recipe Page</h1>
+      <p>Find delicious recipes based on your ingredients!</p>
+    </div>
+  );
+};
+
+export default RecipePage;

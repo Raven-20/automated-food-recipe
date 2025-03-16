@@ -1,0 +1,53 @@
+/* recipes.css */
+body {
+    background-color: #FAF3E0; /* Off-white background for a clean look */
+    color: #333; /* Dark gray for readability */
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.recipes-container {
+    padding: 20px;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #FF9800; /* Orange for a warm, energetic feel */
+    color: white;
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 8px;
+    width: 80%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+li:hover {
+    transform: scale(1.05);
+    background-color: #E68900; /* Slightly darker orange on hover */
+}
+
+button {
+    background-color: #73e887; /* Green for action buttons */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-left: 8px; /* Adds space between input and button */
+}
+
+button:hover {
+    background-color: #3E8E41; /* Darker green on hover */
+}
