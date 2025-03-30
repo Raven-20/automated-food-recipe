@@ -1,22 +1,28 @@
 import "../styles/Recipes.css";
+import { useEffect, useState } from "react";
+import RecipeCard from "../components/RecipeCard";
 
 const Recipes = () => {
-  const sampleRecipes = [
-    { id: 1, name: "Spaghetti Carbonara" },
-    { id: 2, name: "Chicken Adobo" },
-    { id: 3, name: "Pancit Canton" },
-  ];
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/recipes/all")
+      .then((res) => res.json())
+      .then((data) => setRecipes(data))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
-    <div className="recipes-container">
-      <h2>Recipes</h2>
-      <ul>
-        {sampleRecipes.map((recipe) => (
-          <li key={recipe.id}>{recipe.name}</li>
+    <div>
+      <h2>Recipe List</h2>
+      <div className="recipe-container">
+        {recipes.map((recipe) => (
+          <RecipeCard key={recipe._id} recipe={recipe} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
 
 export default Recipes;
+
