@@ -1,88 +1,159 @@
-.home-container {
+/* Home Page Wrapper */
+.home-page-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  background-color: #f0f0f0;
-  padding: 0;
-  box-sizing: border-box;
+  align-items: center;
+  background: #FAF3E0; /* Off-white background */
+  padding: 10px;
+  width: 100%;
+  top: 0;
 }
 
-.search-container {
-  align-items: center;
-  width: 95vw;
-  background-color: #f0f0f0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  padding: 31px;
+/* Main Content */
+.home-content {
+  max-width: 800px;
+  width: 100%;
   text-align: center;
 }
 
-.ingredient-search {
-  display: flex;
-  justify-content: center; /* Centers horizontally */
-  align-items: center;
-  gap: 10px; /* Adds space between input and button */
-  margin: 0 auto 10px; /* Centers container and adds bottom margin */
-  width: 100%; /* Ensures full width for responsiveness */
-  max-width: 500px; /* Limits width for better appearance */
+/* Search Container */
+.search-container {
+  background: rgba(76, 175, 80, 0.15); /* Light Green tint */
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  color: #4CAF50; /* Primary Green */
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+  top: 0;
 }
 
-.ingredient-input {
-  flex-grow: 1;
+.search-container h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #4CAF50;
+}
+
+.search-container p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Input Field */
+.search-bar input {
+  width: 80%;
   padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  width: 100%; /* Ensures full use of available space */
-  font-size: 16px;
+  font-size: 1rem;
+  border: 2px solid #4CAF50;
+  border-radius: 8px;
+  outline: none;
+  background: #FAF3E0;
+  text-align: center;
+  color: #333;
 }
 
-.add-ingredient-btn {
-  display: inline-flex; /* Ensures content stays in one line */
-  align-items: center; /* Aligns text and symbol in the center */
-  justify-content: center;
-  padding: 10px 15px;
-  background-color: #888;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  gap: 5px; /* Space between "+" and "Add" */
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
+/* Find Recipes Button */
 .find-recipes-btn {
-  width: 15%;
-  padding: 12px;
-  background-color: #4CAF50;
+  background: #FF9800; /* Secondary Orange */
   color: white;
   border: none;
-  border-radius: 4px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  margin-top: 15px;
+  transition: background 0.3s, transform 0.2s;
 }
 
 .find-recipes-btn:hover {
-  background-color: #45a049;
+  background: #e68900;
+  transform: scale(1.05);
 }
 
-.no-recipes-container {
-  margin-top: 30px;
+.find-recipes-btn.disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Error Message */
+.error-message {
+  color: #e53935;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Recipe Results */
+.recipe-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* Recipe Card */
+.recipe-card {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.2s;
+  border-left: 5px solid #4CAF50;
+}
+
+.recipe-card:hover {
+  transform: scale(1.05);
+}
+
+.recipe-card h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #4CAF50;
+}
+
+.recipe-card p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+  color: #333;
+}
+
+/* No Recipes Section */
+.no-recipes-section {
+  margin-top: 20px;
   text-align: center;
 }
 
 .no-recipes-image {
-  max-width: 300px;
-  margin-bottom: 15px;
+  width: 250px;
+  height: auto;
+  opacity: 0.8;
 }
 
-.show-filters-btn {
-  color: #666;
-  text-decoration: underline;
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-top: 15px;
+.no-recipes-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #4CAF50;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-container {
+    padding: 20px;
+  }
+
+  .search-bar input {
+    width: 100%;
+  }
+
+  .find-recipes-btn {
+    width: 100%;
+  }
+
+  .recipe-results {
+    grid-template-columns: 1fr;
+  }
 }

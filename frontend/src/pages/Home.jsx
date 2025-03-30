@@ -1,19 +1,35 @@
-import React, { useState } from 'react';
-import '../styles/Home.css';
+import React, { useState } from "react";
+import SearchBar from "../components/SearchBar";
+import "../styles/Home.css";
 
 const Home = () => {
-  const [ingredients, setIngredients] = useState('');
+  const [ingredients, setIngredients] = useState("");  // Stores search input
+  const [recipes, setRecipes] = useState([]); // Stores fetched recipes
+  const [error, setError] = useState(""); // Stores error messages
+  const [loading, setLoading] = useState(false); // Loading state
 
-  const handleIngredientChange = (e) => {
-    setIngredients(e.target.value);
-  };
+  const handleFindRecipes = async () => {
+    if (!ingredients.trim()) return; // Prevent empty searches
+    
+    setLoading(true);
+    setError("");
 
-  const handleAddIngredient = () => {
-    // Future implementation for adding ingredients
-  };
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/recipes/search?ingredients=${ingredients}`
+      );
 
-  const handleFindRecipes = () => {
-    // Future implementation for finding recipes
+      if (!response.ok) {
+        throw new Error("Failed to fetch recipes. Try again.");
+      }
+
+      const data = await response.json();
+      setRecipes(data); // Update state with fetched recipes
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -21,45 +37,40 @@ const Home = () => {
       <div className="home-content">
         <div className="search-container">
           <h1>Find Delicious Recipes</h1>
-          <p>Enter ingredients you have at home and discover amazing recipes you can make right now.</p>
+          <p>Enter ingredients you have at home and discover amazing recipes.</p>
 
-          <div className="ingredient-search">
-            <input 
-              type="text" 
-              className="ingredient-input"
-              placeholder="Enter an ingredient..."
-              value={ingredients}
-              onChange={handleIngredientChange}
-            />
-            <button 
-              className="add-ingredient-btn"
-              onClick={handleAddIngredient}
-            >
-              <span>+</span> Add
-            </button>
-          </div>
+          {/* SearchBar only collects input and updates state in Home */}
+          <SearchBar ingredients={ingredients} setIngredients={setIngredients} />
 
           <button 
-            className="find-recipes-btn"
+            className={`find-recipes-btn ${loading ? "disabled" : ""}`}
             onClick={handleFindRecipes}
+            disabled={loading}
           >
-            Find Recipes
+            {loading ? "Searching..." : "Find Recipes"}
           </button>
-        </div>
 
-        <div className="no-recipes-section">
-          <img 
-            src="/api/placeholder/300/200" 
-            alt="No recipes found" 
-            className="no-recipes-image"
-          />
-          <p className="no-recipes-title">No recipes found</p>
-          <p className="no-recipes-description">
-            Try adjusting your filters or adding different ingredients to find more recipes.
-          </p>
-          <button className="show-filters-btn">
-            Show Filters
-          </button>
+          {error && <p className="error-message">{error}</p>}
+
+          {/* Display recipes if found */}
+          {recipes.length > 0 ? (
+            <div className="recipe-results">
+              {recipes.map((recipe, index) => (
+                <div key={index} className="recipe-card">
+                  <h3>{recipe.name}</h3>
+                  <p>{recipe.description}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="no-recipes-section">
+              <img 
+                src="https://via.placeholder.com/300x200?text=No+Recipes+Found"
+                alt="No recipes found" 
+                className="no-recipes-image"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
